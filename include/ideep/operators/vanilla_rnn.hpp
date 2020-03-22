@@ -27,7 +27,7 @@ struct rnn_forward : public dnnl::vanilla_rnn_forward {
       tensor& dst_iter,
       tensor& workspace,
       rnn_kind akind,
-      dnnl_rnn_direction_t direction,
+      rnn_direction direction,
       prop_kind aprop_kind = prop_kind::forward_training,
       const engine& aengine = engine::cpu_engine()) {
 
@@ -103,7 +103,7 @@ struct rnn_backward : public dnnl::vanilla_rnn_backward {
       tensor& diff_weights_iter,
       tensor& diff_bias,
       rnn_kind akind,
-      dnnl_rnn_direction_t direction,
+      rnn_direction direction,
       prop_kind aprop_kind = prop_kind::backward,
       const engine& aengine = engine::cpu_engine()) {
   }
