@@ -168,8 +168,9 @@ struct batch_normalization_backward
     // TODO: support no-affine model
     auto pd_flags = flags | batch_normalization_flag::use_scale_shift;
     bool with_workspace = (bool) (flags & batch_normalization_flag::fuse_norm_relu);
-    
-    auto src_desc = src.get_desc();
+    // workaround: use src.get_desc() once issue intel/mkl-dnn#588 is resolved
+    auto src_desc = src._get_unblocked_desc_if_4c_blocked();
+    // auto src_desc = src.get_desc();
     auto forward_hints = dnnl::batch_normalization_forward::primitive_desc(
         {prop_kind::forward_training, src_desc, epsilon, pd_flags}, aengine);
     auto diff_src_desc = diff_dst.get_desc();
