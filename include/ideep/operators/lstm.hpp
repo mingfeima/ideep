@@ -2,7 +2,7 @@
 #define IDEEP_OPERATORS_LSTM_HPP
 
 namespace ideep {
-
+// test
 struct lstm_forward : public dnnl::lstm_forward {
   static void compute() {
   }
